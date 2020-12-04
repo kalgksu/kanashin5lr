@@ -1,31 +1,63 @@
-<!DOCTYPE html>
+<?
+require_once('connect.php');
+?>
+
 <html>
-<head>
-	<title>КалгановаК.А._ИП_ЛР2</title>
-<body bgcolor="#F0FFF0">
-</head>
+<head> <title> Сведения о языках </title> </head>
 
-<h1> Калганова К.А.<br>ПИ-320</h1>
-<h2> Лабораторная работа №1</h2>
-<ol><li><a href="lab1-5.php" >Задача №1</a>
-<li><a href="lab-2-10.php" >Задача №2</a>
-<li><a href="lab-2-11.php" >Задача №3</a></ol>
+<body bgcolor="#FFE4E1">
+   <style>
+   h1 {
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+   } 
+  
+  
+  </style>
 
-<h2> Лабораторная работа №2</h2>
-<ol><li><a href="lab2.4.php" >Задача №1</a>
-<li><a href="lab2.5.php" >Задача №2</a>
-<li><a href="lab2.6.php" >Задача №3</a></ol>
+<h1 style="color:#800080">Список языков программирования</h1>
+<table border="2">
+    <style>
+   table {
+    width: 50%; 
+    border-collapse: collapse; 
+   }
+   td, th {
+    padding: 4px; 
+    border: 1px solid #000080; 
+   }
+   th {
+    background: #C71585; 
+    color: #ffe; 
+    text-align: left; 
+    font-family: Arial, Helvetica, sans-serif; 
+    font-size: 0.9em; 
+   }
+  </style>
+ 
+<tr> 
+ <th> Название </th> <th> Тип </th> <th> Год разработки </th> <th> Тип выполнения </th> <th> Автор </th> 
+ <th> Редактирование </th> <th> Удаление </th> </tr>
+<?php
+$res = mysqli_query($connection, "SELECT * FROM `lang`");
+$res = mysqli_fetch_all($res);
+  foreach ($res as $res) {
+                ?>
+                    <tr>
+                        <td><?= $res[1] ?></td>
+                        <td><?= $res[2] ?></td>
+                        <td><?= $res[3] ?></td>
+                        <td><?= $res[4] ?></td>
+                        <td><?= $res[5] ?></td>
+                        <td><a href="edit.php?id=<?= $res[0] ?>">Изменить</a></td>
+                        <td><a href="delete.php?id=<?= $res[0] ?>">Уничтожить</a></td>
+                    </tr>
+                <?php
+            }
+        ?>
+        <?
+print "</table>";
+?>
 
-<h2> Лабораторная работа №3</h2>
- <ol><li><a href="s3-1.php">Задача №1</a>
- <li><a href="s3-2.php">Задача №2</a>
- <li><a href="s3-3.php">Задача №3</a>
- <li><a href="s3-4.php">Задача №4</a>
- <li><a href="s3-5.php">Задача №5</a>
- <li><a href="s3-6.php">Задача №6</a></ol>
- <h2> Лабораторная работа №4</h2>
- 	<ol><li><a href="labwork4/index.php">Задание. Вариант №11</a></ol>
- 	<h2> Лабораторная работа №5</h2>
- 	<ol><li><a href="labwork5/index.php">Задание. Вариант №11</a></ol>
-</body>
-</html>
+<p> <a href="new.php"> Добавить новый язык </a>
+
+</body> </html>
